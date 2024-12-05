@@ -9,6 +9,7 @@
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
 \usepackage{booktabs}
+\usepackage{appendix}
 \usepackage[version=4]{mhchem}
 \usepackage{listings} % For code
 \usepackage{float}
@@ -53,6 +54,11 @@
     \end{figure}
 } % \simpleimage[ratio of linewidth (i.e. 0.5)]{image_name}{caption}{reference_name}
 
+\newcommand{\addappendix}[2]{
+    \chapter*{Appendix #1: #2}
+    \addcontentsline{toc}{section}{Appendix #1: #2}
+}
+
 \newcommand{\setparindent}{
     \setlength{\parskip}{1em} % paragraphs separated by one line
     \setlength{\parindent}{2.5em} % no paragraph indents
@@ -78,7 +84,7 @@
 \urlstyle{same} % makes a nicer URL and DOI font
 \renewcommand{\headrulewidth}{0pt}
 \geometry{letterpaper, portrait, margin=1in}
-\setlength{\headheight}{14.49998pt}
+\setlength{\headheight}{14pt}
 
 \raggedright % Removes justification completely
 %\sloppy % Make the right edge sloppy, use \fussy to change back
@@ -118,6 +124,12 @@
 \fancyhf{}
 \rhead{\thepage}
 \lhead{Reintjes, Gonz\'alez P\'erez, Samuel, Hassan}
+
+\fancypagestyle{plain}{
+    \fancyhf{} % Clear default header/footer
+    \rhead{\thepage}
+    \lhead{Reintjes, Gonz\'alez P\'erez, Samuel, Hassan}
+    }
 
 \chapter*{Abstract}
 \setparindent
@@ -195,13 +207,55 @@ The white PLA background was not as reflective as originally theorized, so the u
 
 \subsection{Ethanol Standard Curves}
 
+To confirm the proof of concept of the project, ethanol standard curves were created and detected using the NIR to determine the differences in signals between different concentrations of ethanol. $6$ solutions of varying ethanol concentrations were tested in two stages, at higher concentrations and low concentrations. For the first standard curve, $300\text{mL}$ of distilled water was retained in a large beaker. Five, $100\text{mL}$ beakers were set up and labelled according to the scheme in \autoref{table:ethanol_water_high}. These volumes were added to each beaker and 3mL were subsequently taken out and placed into a plastic cuvette. The cuvette was cleaned with a kimwipe and then placed in the NIR to take a reading. The process was repeated for all beakers 3 times to generate 3 replicates for each sample. The concentrations used were far enough so it would make it easier to tell a difference between the absorbance readings taken from the NIR.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{c c c}
+    \toprule
+    Sample & Ethanol Volume (mL) & Distilled Water Volume (mL) \\
+    \midrule
+    1 & 0   & 100 \\
+    2 & 25  & 75  \\
+    3 & 50  & 50  \\
+    4 & 75  & 25  \\
+    5 & 100 & 0   \\
+    \bottomrule
+    \end{tabular}
+    \caption{Ethanol and Distilled Water Volumes for Initial Standards}
+    \label{table:ethanol_water_high}
+    \end{table}
+
+For the second curve, smaller concentrations of ethanol were used to see if the NIR was able to detect small differences in concentrations of ethanol. The process was similar to the first standard curve. In this case, $600\text{mL}$ of distilled water was retrieved in a beaker and six, 100mL beakers were set up and labelled according to the scheme in \autoref{table:ethanol_water_low}. The remainder of the process was the same as before with the labelled volumes being added to each beaker and $3\text{mL}$ extracted to be placed in a plastic cuvette. The NIR spectra was taken and the process was repeated 3 times to generate 3 replicates. 
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{c c c}
+    \toprule
+    Sample & Ethanol Volume (mL) & Distilled Water Volume (mL) \\
+    \midrule
+    1 & 0   & 100 \\
+    2 & 1  & 99  \\
+    3 & 2  & 98  \\
+    4 & 3  & 97  \\
+    5 & 4 & 96   \\
+    6 & 5 & 95   \\
+    \bottomrule
+    \end{tabular}
+    \caption{Ethanol and Distilled Water Volumes for Low Concentration Standards}
+    \label{table:ethanol_water_low}
+    \end{table}
+
 \subsection{Yeast Culture}
 
-\subsection{Lactobacillus Viability Test}
+\subsection{\emph{Lactobacillus} Viability Test}
 
-\subsubsection{Culture Preparation}
+The Lactobacillus Rhamnosus viability test was conducted at the beginning of the term before running the experiments to ensure that the bacteria were alive when it came time to test the contaminated samples. This was performed by initially sterilizing the environment by lighting a Bunsen burner on an absorption mat. Then four MRS agar plates were inoculated with bacteria from the frozen samples from the previous term using an inoculating loop. Two samples each were taken from the hyperconcentrated and normal concentration samples, and one MRS plate was left untouched to serve as the control. The cells were evenly spread throughout the plate using a cell spreader to ensure even growth and the plates were then closed and wrapped with parafilm. They were then incubated at 37°C for 24 hours to allow for the bacteria to grow. 
 
-\subsubsection{Plating}
+\subsubsection{Lactobacillus Plating}
+
+To prepare the contaminated cultures, a sterile environment was created by lighting a bunsen burner on an absorption mat, after which a hyperconcentrated sample of lactobacillus was retrieved from the freezer. An inoculating loop was used to pick up bacteria from the sample and placed on an agar plate, after which a cell spreader was used to spread the bacteria evenly across the plate. A second agar plate was also retrieved to serve as a control. Once the colonies were evenly spread the plate was closed, wrapped with parafilm and placed in an incubator for 24 hours at $37^{\circ}C$. After the incubation, the plate with lactobacillus was retrieved, and an inoculating loop was used to pick up colonies and place them in 20mL of YPD in an erlenmeyer flask. Afterwards, the flask was placed in a shaking incubator for 48 hours at $37^{\circ}C$. After 2 days the sample had reached confluency and 500uL were placed in test tubes after which the remaining was filled with YPD to reach a final volume of 3mL. The samples were then labeled and placed in the freezer at $-20^{\circ}C$ until they were needed for contaminated runs,   
+
 
 \subsection{Spectral Measurement}
 
@@ -251,6 +305,12 @@ Optimizers are functions responsible for adjusting the parameters as training pr
 
 The binary cross-entropy loss function was used in the model due to the binary classification nature of the project. The loss function is defined in \autoref{eq:loss_function}, where $y$ is the label $(1$ for contaminated and $0$ for non-contaminated$)$ and $p(y)$ is the predicted probability of the point being contaminated for all $N$ points. Binary cross-entropy quantifies the differences between the logarithmic probability distributions and penalizes inaccurate predictions which helps assess the model’s prediction confidence.
 
+\section{Results}
+
+\section{Discussion}
+
+\section{Conclusion}
+
 \begin{comment}
 \begin{equation} % add * after equation for unnumbered equations
      \hat{H} \psi = i \hbar \frac{\partial \Psi}{\partial t}
@@ -267,5 +327,40 @@ The binary cross-entropy loss function was used in the model due to the binary c
 \printbibliography % If something looks strange in the bibliography, more often than not, you can modify the parameter in the .bib to fix the problem
 \thispagestyle{empty}
 
+
+\newpage
 \appendix
+\addappendix{A}{Problems}
+
+As the experiment progressed, numerous changes were implemented in response to problems experienced in the laboratory. The initial plan involved using T25 flasks for fermentation and analysis. However, the spectra observed did not meet the theoretical composition analysis. Additionally, the volume of culture required was approximately 40 mL. This led to the experiment utilizing a cuvette for NIR spectroscopic analysis. 
+The primary goal of this project was to carry out a Quantitative Composition Analysis. However, the lack of precise instruments, the spectra obtained did not have the sharpness and accuracy for quantitative analysis. This made it impossible to develop a prediction model and the project shifted focus to create a qualitative analysis.
+
+Spectra for varying concentrations of glucose and ethanol were analysed. There were no observable differences in glucose production. As a result, the experiment, anaerobic fermentation was pursued and ethanol production was analysed to gain insight into the fermentation process in the cuvette. 
+Plastic cuvettes were used for the qualitative analysis of the fermentation process as it was convenient and easy to establish a proof-of-concept. However, the spectra were not precise due to the reflection of light interfering with the results. In response, quartz cuvettes is proposed as a viable alternative for precise spectra. Important to note, that this has to be carried out yet. 
+Throughout the experimental runs, there were technical issues encountered that directly impacted the frequency of results collected. The computer shut down after the first experiment. IT administration had to manually turn off that setting. For the following experiments, the computer restarts past 11:30 PM. As a result, the spectra would be taken only for 7-12 hours. For 2 runs, the NIR spectrometer was restarted the following day. Hence, there is unaccounted time in the fermentation process.
+
+The final issue faced is the background is absorbing some of the light signals. Acrylonitrile Butadiene Styrene is the current background and it is used for 3D printing the NIR housing as it can withstand the heat generated from the NIR spectrometer. Two possible solutions can address this issue and will be implemented based on financial considerations. The first is to use a Teflon tape to prevent absorbance and maximize the reflectance. Alternatively, a transmittance module will be purchased to detect the signal and convert it to spectra
+
+\addappendix{B}{Materials}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l l l}
+    \toprule
+    Item & Supplier & Quantity\\
+    \midrule
+    DLP NIRscan™ Nano Evaluation Module & Texas Instruments & 1 \\
+    Quartz Glass High Precision Cell & Hellma Analytics & 2 \\
+    PTFE Diffuse Reflector Sheet with Adhesive Backing & ThorLabs & 1 \\
+    ABS Black Filament & Bambu Labs & 1x 1kg \\
+    \textit{S. Cerevisiae} & Sigma Aldrich & 100g \\
+    \textit{Lactobacillus rhamnosus} & ATCC & 1 vial \\
+    Peptone & Sigma Aldrich & 5g \\
+    Yeast Extract & Sigma Aldrich & 5g \\
+    Dextrose & Sigma Aldrich & 10g \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:matinfo}
+    \end{table}
+
 \end{document}
