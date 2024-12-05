@@ -18,6 +18,7 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage{titlesec}
+\usepackage{comment}
 
 \AtEveryBibitem{
     \clearfield{urlyear}
@@ -155,22 +156,93 @@ While different classes of ML algorithms have successfully achieved the classifi
 Convolutional neural networks (CNNs) are a class of deep neural networks commonly used for data analysis due to their successful results in image processing and classification,\cite{AnalysisConvolutionalNeuralsharma2018} speech recognition,\cite{SpeechRecognitionUsingalsobhani2021} and other computer vision tasks. CNNs are a feed-forward multi-layer architecture in which a kernel or filter takes specific features from local regions from the upper layer.  This architecture allows for an autonomous extraction of important features from complex data for analysis and learning.\cite{NIRSpectroscopyCombinedshang2023} A common drawback of the use of CNNs for spectral analysis is the requirement of large data sets during the training process of the model.\cite{zhangNearInfraredSpectralCharacteristic2022} To avoid overfitting due to a limited number of data samples, one-dimensional CNN (1D-CNN) can be used. These models are similar to traditional CNNs except for the data size required and low computational requirements. 1D-CNNs have proven to have good information extraction and high classification accuracy with simple preprocessing techniques. It has been applied by Shang et al.\cite{NIRSpectroscopyCombinedshang2023} for the analysis and classification of NIR spectra from breast cancer tissue to aid in cancer diagnosis, demonstrating a $94.67\%$ classification accuracy. Chai et al.\cite{Improved1DConvolutionalchai2021} also developed an improved 1D-CNN structure to discriminate Anoectochilus roxburghii from its counterfeits using NIR spectra.
 Previous studies performed on 1D-CNN for the analysis of NIR spectral data demonstrate the viability of its application for the online analysis of culture media. The present study aims to develop a method based on NIR spectra acquired on a portable device, as a non-destructive, online method to assess quality attributes of culture media. Due to the expected nature of the data collection, it was necessary to employ a time series analysis when designing the CNN structure. Within this experiment \emph{S. cerevisiae} was used as the model, testing it under two conditions, normal and contaminated with Lactic Acid Bacteria. \emph{Lactobacillus rhamnosus} was used as the contaminant of choice due to its improved growth in the presence of \emph{S. cerevisiae}. Also, using this species ensures the proper growth of \emph{S. cerevisiae} as it remains unaffected in its presence.\cite{YeastHumanCoevolutionnenciarini2024} The NIR spectra of ethanol were analyzed in each case and passed to the deep learning model which classified the “normal” baseline against a “non-normal” sample. 
 
+\section{Methodology}
+\subsection{NIR Housing Design}
 
-\begin{wrapfigure}{r}{0.4\textwidth}
+Due to the design of the DLP NIRscan Nano (Texas Instruments) and the location of the sensor window on the unit, it required a housing to be designed. This housing was designed to both hold the NIR as well as the sample to ensure consistent scan conditions. The housing was created using a 3D printer (P1S, Bambu Labs) using Matte PLA filament (Bambu Labs) for the test models, and was reprinted in ABS filament (Bambu Labs) for the final housing.
+
+The housing underwent multiple iterations with all design and modeling performed within AutoDesk Fusion360 parametric CAD software.\cite{Fusion360} The final iteration of the housing used can be seen below in \autoref{fig:nir_housing}. All of the components slide along a single dovetail mount along the bottom plate to allow for quick assembly while keeping all components secure. Due to slight problems with temperature regulation, a NF-A4x10 5V PWM fan from Noctua was added in addition to a fan speed controller (NA-FC1), to prevent the NIR from overheating during scans. A cuvette holder was also designed to allow for the quick change of samples, while also ensuring that the cuvette remained fixed in place for scans.
+
+\begin{figure}[!h]
     \centering
-    \includegraphics[width=0.38\textwidth]{example-image}
-    \caption{A wrapped figure with forced placement.}
-\end{wrapfigure}
+    \begin{subfigure}[b]{0.4355\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/nir_housing.png}  % Replace with your image file
+        \caption{NIR Housing}
+        \label{fig:nir_subfig1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.551\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/nir_exploded.png}  % Replace with your image file
+        \caption{NIR Housing Exploded}
+        \label{fig:nir_subfig2}
+    \end{subfigure}
+    \caption{NIR Housing Design}
+    \label{fig:nir_housing}
+\end{figure}
 
-Nullam quis cursus risus. Nullam vitae ligula non felis faucibus molestie. Praesent aliquam sed neque id dignissim. Morbi in lectus elementum, luctus purus eget, tempus metus. Maecenas ut blandit justo. Proin nisi nisi, pretium quis elit non, scelerisque fringilla mauris. Praesent vel velit neque. Vestibulum viverra ipsum vel lorem pellentesque, a consequat nisi vehicula. Nulla facilisi. Cras euismod, turpis sed vestibulum interdum, odio diam fringilla neque, eget auctor nunc erat quis tellus. In lobortis nunc elit, quis condimentum magna ultrices ut. Donec ipsum elit, volutpat eget enim at, venenatis egestas augue. Nam elementum ipsum in felis tristique pretium.
+The white PLA background was not as reflective as originally theorized, so the use of Teflon (PTFE) was considered. A high-reflectance PTFE sheet with 3M Adhesive backing was purchased from ThorLabs. This sheet has a reflectance $(> 90\%)$ in the UV spectrum,\cite{HighReflectancePTFESheetsthorlabs} and is one factor attributed to improving the signal-noise-ratio (SNR) within the scans.
 
-Etiam a mi cursus, vehicula magna id, vestibulum urna. Vivamus pharetra arcu tellus, eu dignissim felis suscipit ut. Phasellus et ligula aliquam, convallis elit quis, ullamcorper purus. Etiam turpis ligula, tincidunt sed tincidunt nec, pellentesque nec est. Fusce non mollis mi. Mauris ut elit tempor, euismod erat nec, lacinia metus. Morbi maximus neque dolor, nec pulvinar dui scelerisque et. Vestibulum efficitur mollis lobortis. In hac habitasse platea dictumst. Vestibulum ut nibh et felis scelerisque mattis a at mauris. Aliquam erat volutpat. Vivamus vel massa egestas, tempor dolor ac, imperdiet ipsum.
+\subsection{Ethanol Standard Curves}
 
-\section{Major Heading}
-\subsection{Subheading}
-\subsubsection{Subsubheading}
-Etiam nec malesuada ex. Vestibulum laoreet purus nec metus egestas, sit amet fringilla ipsum laoreet. Pellentesque ornare, neque in convallis maximus, quam mi facilisis felis, sed cursus dui lectus sit amet felis. Proin finibus quis urna ut sollicitudin. Vestibulum congue, ex vitae suscipit efficitur, elit quam ullamcorper est, eget tempus mi velit eget mi. Integer eget nunc eu eros cursus bibendum. Vestibulum ultrices ligula quis nulla porta malesuada. Morbi vel mi vel erat tempor consectetur sed a arcu. Phasellus convallis nibh ut erat posuere, a pharetra ipsum viverra. Praesent scelerisque maximus urna. Nam mattis ac massa in scelerisque. Praesent vulputate feugiat diam id eleifend. Phasellus iaculis ut lectus vestibulum volutpat.
+\subsection{Yeast Culture}
 
+\subsection{Lactobacillus Viability Test}
+
+\subsubsection{Culture Preparation}
+
+\subsubsection{Plating}
+
+\subsection{Spectral Measurement}
+
+\begin{table}
+    \centering
+        \begin{tabular}{l c}
+        \toprule
+        Variable & Setpoint\\
+        \midrule
+        Start wavelength (nm): & $900$ \\
+        End wavelength (nm): & $4.68$ \\
+        Pattern Pixel Width (nm): & $1500$ \\
+        Exposure (ms): & $1.27$ \\
+        Digital Resolution: & $264$ \\
+        Scan Repeats: & $9$ \\
+        PGA Gain: & $64$ \\
+        \bottomrule
+        \end{tabular}
+        \caption{Scan Setting for DLP NIRScan Nano}
+        \label{tab:scaninfo}
+\end{table}
+
+\subsubsection{Spectral Processing}
+
+Hadamard Transform is one of the available protocols built into the DLP NIRscan Nano. Unlike the column protocol which only reads one wavelength at a time, the Hadamard protocol takes a multiplex scan of multiple wavelengths simultaneously. An algorithm is then used to decode the individual wavelengths from the multiplex scan. The benefit of using Hadamard over Column is that Hadamard has a much better signal-noise ratio which will minimize the required preprocessing later.
+
+\subsection{Data Pipeline}
+
+\subsection{Convolutional Neural Network}
+
+The classification of near-infrared (NIR) spectra to determine the contamination state of liquid media was performed with a one-dimensional convolutional neural network (1D-CNN). This neural network model uses the Keras library with Tensorflow as the backend. The use of Keras facilitates the modelling of the CNN due to its intuitive and user-friendly interface.\cite{kerasteam_keras} The Tensorflow backend allows for accelerated training when used with GPU.\cite{acecloudteam_2024_tensorflow} It also enables a detailed visualization through Tensorboard. Their combination results in a flexible model with easily customizable variables, like the layers and optimizers, along with shorter training times	
+
+\subsubsection{Model Architecture}
+
+The architecture of the model employs five different layers repeated at different points, as shown in figure x. The model consists of two Conv1D layers, with 64 and 32 filters respectively. These filters allow for the extraction of significant features in the input data.\cite{nisha_2020_applications} These features set the parameters that will be learned throughout training. To avoid overfitting and reduce the dimensionality of these parameters, MaxPooling1D layers and Dropout layers are implemented after the Conv1D layers.
+
+The activation function, or function that transforms the input of a node into an output of that node, is a key component of a neural network. The model uses the Rectified Linear Unit (ReLU) function as the activation function, which only outputs non-negative outputs or zeros.\cite{brownlee_2019_a} This is commonly used in CNNs due to its ease of training and superior performance. A final dense layer is implemented with a sigmoidal activation function. This function outputs a probability score between 0 and 1 to determine the contamination state of the sample: 0 for non-contaminated and 1 for contaminated.\cite{saeed_2021_a} 
+
+Figure x. 1D-CNN architecture diagram
+\subsubsection{Optimizer and Loss Function}
+Optimizers are functions responsible for adjusting the parameters as training progresses.\cite{eitcaacademy_2023_what} This is done to reduce the loss function, a mathematical quantification of the error margin between the prediction and the ground truth. The Adam algorithm was chosen as the optimizer. This follows a stochastic gradient descent based on adaptive estimation and regulated by the learning rate.\cite{kerasteam_keras} It allows for the model to reach an optimal point faster without taking large learning steps that could lead to skipping key information during training. The learning rate was set to 0.0005 to avoid reaching a convergence between the ground truth and prediction too early during training.
+
+\begin{equation}
+    L = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \cdot \log(p(y_i)) + (1 - y_i) \cdot \log(1 - p(y_i)) \right]
+    \label{eq:loss_function}
+\end{equation}
+
+The binary cross-entropy loss function was used in the model due to the binary classification nature of the project. The loss function is defined in \autoref{eq:loss_function}, where $y$ is the label (1 for contaminated and 0 for non-contaminated) and $p(y)$ is the predicted probability of the point being contaminated for all N points. Binary cross-entropy quantifies the differences between the logarithmic probability distributions and penalizes inaccurate predictions which helps assess the model’s prediction confidence.
+
+\begin{comment}
 \begin{equation} % add * after equation for unnumbered equations
      \hat{H} \psi = i \hbar \frac{\partial \Psi}{\partial t}
 \end{equation}
@@ -180,16 +252,7 @@ Etiam nec malesuada ex. Vestibulum laoreet purus nec metus egestas, sit amet fri
     ln\left(\frac{D}{D_0}\right) &= -\frac{\mu}{\rho}\rho x \\
     x &= \frac{-ln\left(\frac{D}{D_0}\right)}{\frac{\mu}{\rho}\rho}
 \end{align}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit tortor ut pharetra auctor. Curabitur posuere massa vitae commodo malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet lacus nec quam auctor, eget suscipit turpis efficitur. Sed convallis sed enim eu sagittis. Nunc pretium id lacus ut lacinia. Praesent gravida varius faucibus. Maecenas commodo pretium dignissim.
-
-Nulla vulputate congue felis eget scelerisque. Aenean gravida scelerisque risus, id placerat magna condimentum quis. Proin in aliquet mi. Aenean accumsan luctus malesuada. Nam volutpat volutpat sapien. Praesent vitae finibus arcu. Sed blandit eu ex non condimentum. Maecenas lacus ligula, eleifend in elit non, fermentum ultrices turpis. Morbi viverra, dolor ultrices elementum convallis, enim magna pharetra mi, sit amet molestie magna urna vel risus. Maecenas at sem leo. Nunc vulputate nisi nec commodo malesuada. Donec iaculis cursus pulvinar. Curabitur sem quam, venenatis egestas lobortis sit amet, semper a sem. Donec enim nibh, interdum at libero ut, mattis sollicitudin lectus. Duis malesuada, odio et dictum scelerisque, felis ante tristique tellus, vel suscipit mi massa suscipit nisl. Suspendisse ullamcorper enim vel nisl porttitor, non placerat ipsum maximus.
-
-\addimage[0.7]{Black Hole Image.jpg}{An Image of a Black Hole\cite{hawking_particle_1993}}{black_hole}
-
-\section{Major Heading}
-Etiam a mi cursus, vehicula magna id, vestibulum urna. Vivamus pharetra arcu tellus, eu dignissim felis suscipit ut. Phasellus et ligula aliquam, convallis elit quis, ullamcorper purus. Etiam turpis ligula, tincidunt sed tincidunt nec, pellentesque nec est. Fusce non mollis mi. Mauris ut elit tempor, euismod erat nec, lacinia metus. Morbi maximus neque dolor, nec pulvinar dui scelerisque et. Vestibulum efficitur mollis lobortis. In hac habitasse platea dictumst. Vestibulum ut nibh et felis scelerisque mattis a at mauris. Aliquam erat volutpat. Vivamus vel massa egestas, tempor dolor ac, imperdiet ipsum \cite{rojas_engadget_2006}.
-
-Etiam nec malesuada ex. Vestibulum laoreet purus nec metus egestas, sit amet fringilla ipsum laoreet. Pellentesque ornare, neque in convallis maximus, quam mi facilisis felis, sed cursus dui lectus sit amet felis. Proin finibus quis urna ut sollicitudin. Vestibulum congue, ex vitae suscipit efficitur, elit quam ullamcorper est, eget tempus mi velit eget mi. Integer eget nunc eu eros cursus bibendum. Vestibulum ultrices ligula quis nulla porta malesuada. Morbi vel mi vel erat tempor consectetur sed a arcu. Phasellus convallis nibh ut erat posuere, a pharetra ipsum viverra. Praesent vulputate feugiat diam id eleifend. Phasellus iaculis ut lectus vestibulum volutpat \cite{amjad_value_2020}.
+\end{comment}
 
 \newpage
 \printbibliography % If something looks strange in the bibliography, more often than not, you can modify the parameter in the .bib to fix the problem
